@@ -1,0 +1,25 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* space between rows */
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 equal columns */
+  gap: 20px; /* space between the two fields */
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
