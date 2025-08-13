@@ -1,1 +1,12 @@
-<p>department works!</p>
+ <div style="margin-bottom: 10px;">
+      <button (click)="addRow()">➕ Add Row</button>
+    </div>
+
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      style="width: 100%; height: 500px;"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      (gridReady)="onGridReady($event)">
+    </ag-grid-angular>

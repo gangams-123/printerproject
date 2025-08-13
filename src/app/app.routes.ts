@@ -6,6 +6,8 @@ import { Landing} from './landing/landing';
 import { BranchMaster } from './branch-master/branch-master';
 import { Department } from './department/department';
 import { Designation } from './designation/designation';
+import { Officials } from './officials/officials';
+import { Customers } from './customers/customers';
 
 export const routes: Routes = [
       { path: '', component: Userlogin,pathMatch:'full' }, // Default route
@@ -26,6 +28,14 @@ export const routes: Routes = [
              {
                 path:'designationm',
                 component:Designation
+            },
+             {
+                path:'officialsm',
+                component:Officials
+            },
+             {
+                path:'customersm',
+                component:Customers
             }
       ]
      },

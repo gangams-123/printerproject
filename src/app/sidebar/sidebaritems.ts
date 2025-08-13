@@ -26,6 +26,22 @@ export const list=[
                title:'Designation Master',
               routerLink:'/designationm',
            }]
+       } ,{
+          number:'1.2',
+          title:'Users',
+           icon: 'dashboard',
+           open: false,
+            children:
+           [{ 
+                title:'Officials',
+                routerLink:'/officialsm',
+                 queryParam:{view:true}
+           },
+           {
+                title:'Custmers',
+                routerLink:'/customersm',
+                 queryParam:{view:true}
+           }]
        }             
        ]
     },
