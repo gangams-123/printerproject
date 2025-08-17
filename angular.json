@@ -80,6 +80,7 @@
               }
             ],
             "styles": [
+             
               "src/styles.css"
             ]
           }

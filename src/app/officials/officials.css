@@ -1,0 +1,18 @@
+.form-row {
+  display: flex;
+  gap: 16px; /* space between fields */
+}
+
+.form-field {
+  flex: 1; /* all fields take equal width */
+}
+
+.full-width {
+  width: 100%;
+}
+.gender-group {
+  display: flex;
+  flex-direction: row;
+  gap: 16px; /* spacing between buttons */
+}
+

@@ -8,7 +8,9 @@ import { Department } from './department/department';
 import { Designation } from './designation/designation';
 import { Officials } from './officials/officials';
 import { Customers } from './customers/customers';
-
+import { Billingcycle } from './billingcycle/billingcycle';
+import { Category } from './category/category';
+import { Supportticket } from './supportticket/supportticket';
 export const routes: Routes = [
       { path: '', component: Userlogin,pathMatch:'full' }, // Default route
      { path: 'login', component: Userlogin},
@@ -36,6 +38,16 @@ export const routes: Routes = [
              {
                 path:'customersm',
                 component:Customers
+            },
+             {
+                path:'categorym',
+                component:Category
+            }, {
+                path:'billingCyclem',
+                component:Billingcycle
+            }, {
+                path:'ticketm',
+                component:Supportticket
             }
       ]
      },

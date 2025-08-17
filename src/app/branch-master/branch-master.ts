@@ -1,5 +1,5 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
-
+import { Router,RouterModule} from '@angular/router';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,21 +19,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { isPlatformBrowser } from '@angular/common';
 import { AgGridAngular } from 'ag-grid-angular';
-import 'ag-grid-community/styles/ag-grid.css'; // Required base styles for new Theming API
+import 'ag-grid-community/styles/ag-grid.css'; 
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { themeQuartz } from 'ag-grid-community';
-
-import {
-  ColDef,
-  GridApi,
-  GridReadyEvent,
-} from 'ag-grid-community';
+import {ColDef,GridApi,GridReadyEvent} from 'ag-grid-community';
 import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
-
-// Register all community features once in your app (can be in main.ts too)
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
   selector: 'app-branch-master',
@@ -52,13 +43,12 @@ ModuleRegistry.registerModules([AllCommunityModule]);
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AgGridAngular
+    AgGridAngular,RouterModule
   ],
   templateUrl: './branch-master.html',
   styleUrls: ['./branch-master.css'] 
 })
 export class BranchMaster {
-
   countries: any[] = [];
  states: IState[] = [];
   view=true;
@@ -96,21 +86,17 @@ export class BranchMaster {
    gridOptions = {
  theme: themeQuartz
 };
-  isBrowser = false;
-  constructor(private fb: FormBuilder,private branchService: BranchService,private route: ActivatedRoute,
-   @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-  }
+ 
+  constructor(private fb: FormBuilder,private branchService: BranchService,private route: ActivatedRoute,private router:Router
+  ) {}
   ngOnInit(): void {
-        this.countries= Country.getAllCountries();
-        this.route.queryParams.subscribe(params => {
-         if (params['view'] !== undefined) {
-            this.view = (params['view'] == 'true');
-          }
-        });
-         
-  }
+     this.countries= Country.getAllCountries();
+    this.route.queryParams.subscribe(params => {
+    if (params['view'] !== undefined) {
+      this.view = (params['view'] == 'true');
+    }
+  });       
+}
  onGridReady(params: GridReadyEvent) {
  
     this.gridApi = params.api;
@@ -160,6 +146,9 @@ onFileSelected(event: Event) {
       });
     }
   }
+}
+addBranch(){
+  this.router.navigate(['/branchesm'], { queryParams:{view:false}});
 }
 
 }

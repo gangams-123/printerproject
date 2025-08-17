@@ -1,1 +1,187 @@
-<p>officials works!</p>
+<form [formGroup]="officialForm" class="form-container" (ngSubmit)="onSubmit()" *ngIf="!view">
+
+  <div class="form-row">
+    <div class="form-field">
+      <label>First Name</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="fname" placeholder="Enter first name">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <label>Middle Name</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="mname" placeholder="Enter middle name">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+        <label>Last Name</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="lname" placeholder="Enter last name">
+      </mat-form-field>
+    </div>
+ </div>
+<div class="form-row">
+    <div class="form-field">
+      <label>Email</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="email" placeholder="Enter Email">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+     <mat-label>Gender</mat-label>
+     <mat-radio-group formControlName="gender" class="gender-group">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+        <mat-radio-button value="other">Other</mat-radio-button>
+    </mat-radio-group>
+
+    </div>
+    <div class="form-field">
+        <label>Date of Birth</label>
+      <mat-form-field appearance="outline" class="full-width">
+         <input matInput [matDatepicker]="picker"  formControlName="dob">
+         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+         <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+ </div>   
+ <div class="form-row">
+    <div class="form-field">
+      <label>Father/Spouse/Mother Name</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="guardianname" placeholder="">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+     <label>Father/spouse/mother Number</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="guardiannum" placeholder="Enter Phone Number">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+        <label>Relationship</label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="relationship" placeholder="Enter Phone Number">
+        </mat-form-field>
+    </div>
+ </div> 
+  <div class="form-row">
+    <div class="form-field">
+       <label>Mobile Number</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="mobile" placeholder="Enter Phone Number">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+      <div class="form-field">
+        <label>Date of Joining</label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput [matDatepicker]="picker1"  formControlName="joiningdate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+         </mat-form-field>
+      </div>
+    </div>
+    <div class="form-field">
+        <label>Basic Salary</label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="basicsal" placeholder="Enter Phone Number">
+        </mat-form-field>
+    </div>
+ </div>   
+<div class="form-row">
+        <div class="form-field">
+             <mat-checkbox formControlName="pf" (change)="toggleTextbox()">PF</mat-checkbox>
+             <mat-form-field *ngIf="pfBox" appearance="outline" class="textbox-inline">
+                 <input matInput formControlName="pfno" placeholder="Please specify pf num">
+            </mat-form-field>
+        </div>
+
+    <div class="form-field">
+        <mat-checkbox formControlName="esi" (change)="toggleTextboxForesi()">Esi</mat-checkbox>
+        <mat-form-field *ngIf="esiBox" appearance="outline" class="textbox-inline">
+            <input matInput formControlName="esino" placeholder="Please specify pf num">
+        </mat-form-field>
+    </div>
+     <div class="form-field" >
+        <mat-label>Select Department</mat-label>
+        <mat-select formControlName="departmentId" appearance="outline" (selectionChange)="onDepartmentChange($event.value)">
+            <mat-option *ngFor="let dept of deptList" [value]="dept.id">{{ dept.name }}</mat-option>
+        </mat-select>
+    </div>
+ </div>   
+<div class="form-row">
+    <div class="form-field" >
+        <mat-label>Select Designation</mat-label>
+        <mat-select formControlName="designationId" appearance="outline" style="width: 100%;">
+            <mat-option *ngFor="let desi of designationList" [value]="desi.designationId">{{ desi.designationName }}</mat-option>
+        </mat-select>
+    </div>
+    <div class="form-field">
+      <div class="form-field">
+           <mat-label>Address</mat-label>
+            <mat-form-field appearance="outline" class="full-width">
+                <input matInput formControlName="inputAddress" placeholder="Enter Address">
+            </mat-form-field>
+        </div>
+    </div>
+       <div class="form-field">
+         <mat-label>Select Country</mat-label>
+         <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-select formControlName="country" (selectionChange)="onCountryChange()">
+                <mat-option *ngFor="let country of countries" [value]="country|json">{{ country.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+ </div>    
+<div class="form-row">
+    <div class="form-field">
+      <mat-label>Select State</mat-label>
+        <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-select formControlName="state">
+                <mat-option *ngFor="let state of states " [value]="state.name">{{ state.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>    
+    </div>   
+    <div class="form-field">
+         <label>City Name </label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="city" placeholder="Enter city name">
+      </mat-form-field>
+    </div>
+    <div class="form-field">
+        <label>Zip Code </label>
+        <mat-form-field appearance="outline" class="full-width">
+            <input matInput formControlName="zip" placeholder="Enter zip code">
+        </mat-form-field>
+    </div>
+    </div>
+    <div class="form-row">
+       <div class="form-field" >
+        <mat-label>Select Branch</mat-label>
+        <mat-select formControlName="branchId" appearance="outline" style="width: 100%;">
+            <mat-option *ngFor="let branch of branchList" [value]="branch.id">{{ branch.name }}</mat-option>
+        </mat-select>
+    </div>
+</div>     
+  <button mat-raised-button color="primary" type="submit"  style="width: 100%"> Submit</button>
+  <!--[disabled]="branchForm.invalid"-->
+</form>
+
+
+
+<div  style="width: 100%; height: 500px;" *ngIf="view">
+    <button mat-raised-button color="primary" type="submit"   style="width: 100%" (click)="addOfficials()"> Add</button>
+<ag-grid-angular
+  class="ag-theme-quartz"
+  style="width: 100%; height: 400px;"
+  [theme]="gridOptions.theme"
+  [columnDefs]="columnDefs"
+  [rowData]="rowData"
+  [pagination]="true"
+  [rowSelection]="rowSelection"
+  (gridReady)="onGridReady($event)">
+</ag-grid-angular>
+
+</div>
+

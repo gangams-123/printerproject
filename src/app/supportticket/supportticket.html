@@ -1,0 +1,81 @@
+
+<form [formGroup]="ticketForm" class="form-container" (ngSubmit)="onSubmit()" *ngIf="!view">
+      <div class="form-row">
+        <div class="form-field">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Search</mat-label>
+      <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto" placeholder="Type to search...">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event.option.value)" >
+        <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+          {{ option.cname }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+</div></div>
+     <div class="form-row">
+    <div class="form-field">
+      <label>Description</label>
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput formControlName="description" placeholder="Enter description">
+      </mat-form-field>
+    </div>
+    </div>
+    <div class="form-row">
+        <div class="form-field">
+             <label>Priority</label>
+           <mat-form-field appearance="outline" class="full-width">
+                <mat-select formControlName="priority">
+                <mat-option *ngFor="let key of priorities" [value]="key.id">{{ key.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+              <input #dateTimeInput matInput placeholder="Choose date and time" readonly />
+              <button mat-icon-button matSuffix type="button" (click)="openPicker()">
+                <mat-icon>event</mat-icon>
+            </button>
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <label>Assignee</label>
+               <mat-select formControlName="assignee" appearance="outline">
+            <mat-option *ngFor="let o of official" [value]="o.id">{{o.firstname+"-"+ o.midname+"-"+o.lastname }}</mat-option>
+        </mat-select>
+        </div>
+    </div> 
+     <div class="form-row">
+      
+              <div class="form-field">
+                <label>Contact Name</label>
+                <mat-form-field appearance="outline" class="full-width">
+                    <input matInput formControlName="contactperson" placeholder="Enter first name">
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Contact Number</label>
+                <mat-form-field appearance="outline" class="full-width">
+                    <input matInput formControlName="contactnum" placeholder="Enter first name">
+                </mat-form-field>
+            </div>
+            <div class="form-field">
+                <label>Contact Email</label>
+                <mat-form-field appearance="outline" class="full-width">
+                    <input matInput formControlName="contactemail" placeholder="Enter first name">
+                </mat-form-field>
+            </div>
+     </div>  
+       <button mat-raised-button color="primary" type="submit"  style="width: 100%"> Submit</button>
+</form>
+<div  style="width: 100%; height: 500px;" *ngIf="view">
+    <button mat-raised-button color="primary" type="submit"   style="width: 100%" (click)="addTicket()"> Add</button>
+<ag-grid-angular
+  class="ag-theme-quartz"
+  style="width: 100%; height: 400px;"
+  [theme]="gridOptions.theme"
+  [columnDefs]="columnDefs"
+  [rowData]="rowData"
+  [pagination]="true"
+  [rowSelection]="rowSelection"
+  (gridReady)="onGridReady($event)">
+</ag-grid-angular>

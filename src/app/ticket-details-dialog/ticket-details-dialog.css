@@ -1,0 +1,8 @@
+.form-row {
+  display: flex;
+  gap: 16px; /* space between fields */
+}
+
+.form-field {
+  flex: 1; /* make fields take equal width */
+}

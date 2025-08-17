@@ -3,20 +3,18 @@ import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { AgGridAngular } from "ag-grid-angular";
-import { Depatmentservice } from './depatmentservice';
-
-
+import { Billingcycleservice } from './billingcycleservice';
 @Component({
-  selector: 'app-department',
+  selector: 'app-billingcycle',
   imports: [AgGridAngular],
-  templateUrl: './department.html',
-  styleUrl: './department.css'
+  templateUrl: './billingcycle.html',
+  styleUrl: './billingcycle.css'
 })
-export class Department {
+export class Billingcycle {
 private gridApi!: GridApi;
  rowData: any[] = [];
  columnDefs: ColDef[] = [
-    { field: 'name', headerName: ' Department Name', editable: true },
+    { field: 'cycle', headerName: ' Billing Cycle Name', editable: true },
     {
       headerName: 'Actions',
       cellRenderer: (params: any) => {
@@ -36,10 +34,10 @@ private gridApi!: GridApi;
     flex: 1,
     editable: true
   };
-  constructor(private depatmentservice:Depatmentservice) {}
+  constructor(private billingCycleService:Billingcycleservice) {}
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-       this.depatmentservice.getAllDepts().subscribe({
+       this.billingCycleService.getAllCycles().subscribe({
             next: (response) => {
             console.log('API Response:', response);
             this.rowData = response; // since it's already an array
@@ -59,14 +57,13 @@ private gridApi!: GridApi;
       }
     });
   }
-  addRow() {
-  const newRow = { id: '', name: '', age: '', isNew: true };
+    addRow() {
+  const newRow = { id: '', name: '', isNew: true };
   this.gridApi.applyTransaction({ add: [newRow] });
 }
-
   saveRow(row: any) {
     console.log('Saving row to backend:', row);
-    this.depatmentservice.createDept(row).subscribe({
+    this.billingCycleService.createCycle(row).subscribe({
        next: (response) => {
             console.log('API Response:', response);
             console.log("data added");
@@ -81,7 +78,7 @@ deleteRow(row: any) {
 
   console.log('Deleted row:', row.id);
   const data={'id':Number(row.id)};
-    this.depatmentservice.deletDept(data).subscribe({
+    this.billingCycleService.deleteCycle(data).subscribe({
         next: (response) => {
                   this.gridApi.applyTransaction({ remove: [row] });
           },

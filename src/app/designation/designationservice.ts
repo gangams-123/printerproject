@@ -14,10 +14,16 @@ export class Designationservice {
   getAllDesignation(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
+  getDesignationByDeptId(deptId:any): Observable<any> {
+    return this.http.get(this.apiUrl, {
+      params: { departmentId: deptId }
+    });
+  }
+
 deleteDesignation(data: any): Observable<any> {
   return this.http.delete(this.apiUrl, {
     headers: { 'Content-Type': 'application/json' },
     body: data
   });
-}
+}  
 }

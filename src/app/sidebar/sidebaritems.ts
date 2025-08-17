@@ -25,6 +25,12 @@ export const list=[
            {
                title:'Designation Master',
               routerLink:'/designationm',
+           }, {
+               title:'Category Master',
+              routerLink:'/categorym',
+           }, {
+               title:'Billing Cycle Master',
+              routerLink:'/billingCyclem',
            }]
        } ,{
           number:'1.2',
@@ -74,5 +80,16 @@ export const list=[
           routerLink: '/reports/inventory'
         }
       ]
-    }
+    } ,{
+      number: '2',
+      title: 'Support',
+      icon: 'bar_chart',
+      open: false,
+      children: [{ 
+                title:'Ticket',
+                routerLink:'/ticketm',
+                 queryParam:{view:true}
+           },
+      ] 
+    }  
   ];

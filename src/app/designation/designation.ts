@@ -101,7 +101,7 @@ export class Designation implements OnInit {
             console.log("designation deleted");
             this.gridApi.applyTransaction({ remove: [event.data] });
           },
-          error: (err) => console.error('Error loading branches:', err)
+          error: (err) => console.error('Error loading designations:', err)
     });
         
       }
